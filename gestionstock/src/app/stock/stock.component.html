@@ -1,69 +1,75 @@
-  <h4>Mes produits :</h4>
+<div>
+  <h4>Cliquez sur un produit :</h4>
   <table>
     <tr>
       <th>Nom</th>
       <th>Description</th>
       <th>Prix</th>
+      <th>Ingrédiants</th>
       <th>Supprimer</th>
     </tr>
     <tr *ngFor="let produit of produits" (click)="getDescription(produit.nom)">
       <td>{{produit.nom | uppercase}}</td>
       <td>{{displayDescription(produit.description) | lowercase}}</td>
       <td>{{produit.prix | number | euro}}</td>
-      <td (click)="deleteProduit(produit.nom)">Supprimer</td>
+      <td>{{produit.ingredients}}</td>
+      <td (click)="deleteProduit(produit.nom)"> <button class="supprimer">Supprimer</button></td>
     </tr>
   </table>
 
-  <div class="description" *ngIf="produitToDisplay">
-    <p>Nom : {{produitToDisplay.nom}}</p>
-    <p>Fournisseur : {{produitToDisplay.fournisseur}}</p>
-    <p>Email fournisseur : {{produitToDisplay.fournisseur}}</p>
-    <p>Liste Ingredients : {{produitToDisplay.ingredients}}</p>
-    <p>Description : {{displayDescription(produitToDisplay.description) | lowercase}}</p>
-    <p>Age : {{produitToDisplay.age}}</p>
-    <p>Condition : {{produitToDisplay.condition}}</p>
-    <p>Prix : {{produitToDisplay.prix | number | euro}}</p>
-  </div>
-
-
-<button (click)="displayForm = !displayForm">Afficher /Faire disparaitre le formulaire</button>
-<div *ngIf="displayForm">
-  <h4>Ajoutez un produit</h4>
-  <form (ngSubmit)="addProduit()" [formGroup]="produitForm" class="flex">
-    <div style="margin: 0 50px">
-      <div class="form-group">
-        <label>Nom du produit</label><br>
-        <input formControlName="nomC">
-      </div>
-      <div class="alert" *ngIf="nomControl.dirty && nomControl.hasError('required')">
-        Nom obligatoire
-      </div>
-      <div class="form-group">
-        <label>Fournisseur</label><br>
-        <input formControlName="fournisseurC">
-        <div class="alert" *ngIf="fournisseurControl.dirty && fournisseurControl.hasError('required')">
-          Fournisseur obligatoire
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Age</label><br>
-        <input formControlName="ageC">
-        <div class="alert" *ngIf="ageControl.dirty && ageControl.hasError('pattern')">
-          Age est un chiffre
-        </div>
-        <div class="alert" *ngIf="ageControl.dirty && ageControl.hasError('required')">
-          Age obligatoire
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Description</label><br>
-        <input formControlName="descC">
-        <div class="alert" *ngIf="descriptionControl.dirty && descriptionControl.hasError('required')">
-          Description obligatoire
-        </div>
-      </div>
-
-      <button [disabled]="produitForm.invalid" style="margin-top: 30px" class="btn btn-success" type="submit">Ajouter le produit</button>
+  <div class="flex">
+    <div class="description" *ngIf="produitToDisplay">
+      <p>Nom : {{produitToDisplay.nom}}</p>
+      <p>Fournisseur : {{produitToDisplay.fournisseur}}</p>
+      <p>Email fournisseur : {{produitToDisplay.fournisseur}}</p>
+      <p>Liste Ingredients : {{produitToDisplay.ingredients}}</p>
+      <p>Description : {{displayDescription(produitToDisplay.description) | lowercase}}</p>
+      <p>Age : {{produitToDisplay.age}}</p>
+      <p>Condition : {{produitToDisplay.condition}}</p>
+      <p>Prix : {{produitToDisplay.prix | number | euro}}</p>
     </div>
-  </form>
+
+
+    <button (click)="displayForm = !displayForm" style="height: 40px">Afficher /Faire disparaitre le formulaire</button>
+    <div *ngIf="displayForm">
+      <h4>Ajoutez un produit</h4>
+      <form (ngSubmit)="addProduit()" [formGroup]="produitForm" class="form">
+        <div style="margin: 0 50px">
+          <div class="form-group">
+            <label>Nom du produit</label><br>
+            <input formControlName="nomC">
+          </div>
+          <div class="alert" *ngIf="nomControl.dirty && nomControl.hasError('required')">
+            Nom obligatoire
+          </div>
+          <div class="form-group">
+            <label>Fournisseur</label><br>
+            <input formControlName="fournisseurC">
+            <div class="alert" *ngIf="fournisseurControl.dirty && fournisseurControl.hasError('required')">
+              Fournisseur obligatoire
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Age</label><br>
+            <input formControlName="ageC">
+            <div class="alert" *ngIf="ageControl.dirty && ageControl.hasError('pattern')">
+              Age est un chiffre
+            </div>
+            <div class="alert" *ngIf="ageControl.dirty && ageControl.hasError('required')">
+              Age obligatoire
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label><br>
+            <input formControlName="descC">
+            <div class="alert" *ngIf="descriptionControl.dirty && descriptionControl.hasError('required')">
+              Description obligatoire
+            </div>
+          </div>
+
+          <button [disabled]="produitForm.invalid" style="margin-top: 30px" class="btn btn-success" type="submit">Ajouter le produit</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

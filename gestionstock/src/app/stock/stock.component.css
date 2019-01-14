@@ -5,3 +5,27 @@ table tr:nth-child(odd){
 .alert {
   color: blue;
 }
+
+.supprimer {
+  background: red;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+}
+
+.description{
+  background: black;
+  color: white;
+  padding: 10px;
+}
+
+.flex{
+  display: flex;
+}
+
+.form{
+  margin-left: 15px;
+}
