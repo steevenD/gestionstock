@@ -1,0 +1,7 @@
+table tr:nth-child(odd){
+  background-color:grey;
+}
+
+.alert {
+  color: blue;
+}
