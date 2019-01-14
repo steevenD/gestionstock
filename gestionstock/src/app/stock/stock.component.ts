@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Produit, produits} from './model/Produit';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {StockService} from './service/stock.service';
+import {DescriptionModalComponent} from './component/description-modal/description-modal.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-stock',
@@ -23,8 +25,7 @@ export class StockComponent implements OnInit {
   ageControl: FormControl;
   descriptionControl: FormControl;
 
-  constructor(private stockService: StockService, private fb: FormBuilder) {
-    // this.idControl = this.fb.control('', [Validators.required]);
+  constructor(private stockService: StockService, private fb: FormBuilder, public dialog: MatDialog) {
     this.nomControl = this.fb.control('', [Validators.required]);
     this.ageControl = this.fb.control('', [Validators.required, Validators.pattern('^[0-9]+$')]);
     this.descriptionControl = this.fb.control('', [Validators.required]);
@@ -45,6 +46,10 @@ export class StockComponent implements OnInit {
 
   getDescription(nom: string){
     this.produitToDisplay = this.stockService.getProduit(nom);
+    this.dialog.open(DescriptionModalComponent, {
+      width: '250px',
+      data: {produitToDisplay: this.produitToDisplay}
+    });
   }
 
   displayDescription(description: string){

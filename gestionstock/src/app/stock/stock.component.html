@@ -1,5 +1,5 @@
 <div>
-  <h4>Cliquez sur un produit :</h4>
+  <mat-toolbar>Cliquez sur un produit :</mat-toolbar>
   <table>
     <tr>
       <th>Nom</th>
@@ -13,13 +13,13 @@
       <td>{{displayDescription(produit.description) | lowercase}}</td>
       <td>{{produit.prix | number | euro}}</td>
       <td>{{produit.ingredients}}</td>
-      <td (click)="deleteProduit(produit.nom)"> <button class="supprimer">Supprimer</button></td>
+      <td (click)="deleteProduit(produit.nom)"> <button mat-button class="supprimer">Supprimer</button></td>
     </tr>
   </table>
 
   <div class="flex">
     <div class="description" *ngIf="produitToDisplay">
-      <p>Nom : {{produitToDisplay.nom}}</p>
+      <p>Nom : {{produitToDisplay.nom | uppercase}}</p>
       <p>Fournisseur : {{produitToDisplay.fournisseur}}</p>
       <p>Email fournisseur : {{produitToDisplay.fournisseur}}</p>
       <p>Liste Ingredients : {{produitToDisplay.ingredients}}</p>
@@ -30,7 +30,8 @@
     </div>
 
 
-    <button (click)="displayForm = !displayForm" style="height: 40px">Afficher /Faire disparaitre le formulaire</button>
+    <button *ngIf="!displayForm" (click)="displayForm = !displayForm" class="buttonApparition" mat-button>Afficher le formulaire</button>
+    <button *ngIf="displayForm" (click)="displayForm = !displayForm" class="buttonApparition" mat-button>Faire disparaitre le formulaire</button>
     <div *ngIf="displayForm">
       <h4>Ajoutez un produit</h4>
       <form (ngSubmit)="addProduit()" [formGroup]="produitForm" class="form">
@@ -67,7 +68,7 @@
             </div>
           </div>
 
-          <button [disabled]="produitForm.invalid" style="margin-top: 30px" class="btn btn-success" type="submit">Ajouter le produit</button>
+          <button mat-button [disabled]="produitForm.invalid" class="buttonValide" type="submit">Ajouter le produit</button>
         </div>
       </form>
     </div>
